@@ -120,11 +120,12 @@ export const useCustomerOnboarding = () => {
 
   // Avançar para próxima etapa
   const nextStep = () => {
-    if (currentStep < ONBOARDING_STEPS.length - 1) {
-      setCurrentStep(currentStep + 1);
-    } else {
+    const nextIndex = currentStep + 1;
+    if (nextIndex >= ONBOARDING_STEPS.length) {
       // Última etapa - fechar e marcar como visto
       completeOnboarding();
+    } else {
+      setCurrentStep(nextIndex);
     }
   };
 
