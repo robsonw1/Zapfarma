@@ -16,6 +16,12 @@ const ONBOARDING_STEPS: OnboardingStep[] = [
     description: 'Vamos conhecer este espaço. Este é seu painel de cliente onde você gerencia tudo!',
   },
   {
+    id: 'theme',
+    title: '🌙 Tema Claro/Escuro',
+    description: 'Clique no ícone de sol/lua no topo para alternar entre modo claro e escuro. Escolha o que é mais confortável para você!',
+    target: 'btn-theme-toggle',
+  },
+  {
     id: 'orders',
     title: '📦 Meus Pedidos',
     description: 'Clique aqui para ver o histórico de todos os seus pedidos. Você pode acompanhar o status de cada um.',
