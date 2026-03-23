@@ -1,4 +1,4 @@
--- Seed completo de 111 produtos para Forneiro Éden
+-- Seed completo de 111 produtos para ZapFarma
 -- Execute no SQL Editor do Supabase
 
 INSERT INTO public.products (id, name, data, created_at) VALUES

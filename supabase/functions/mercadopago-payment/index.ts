@@ -151,7 +151,7 @@ serve(async (req) => {
         pending: `${req.headers.get('origin') || 'https://localhost:3000'}/?status=pending&order=${orderId}`
       },
       auto_return: 'approved',
-      statement_descriptor: 'FORNEIRO EDEN',
+      statement_descriptor: 'ZAPFARMA',
       notification_url: `${Deno.env.get('SUPABASE_URL')}/functions/v1/mercadopago-webhook`
     };
 

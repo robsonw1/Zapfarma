@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSettingsStore } from '@/store/useSettingsStore';
 import { supabase } from '@/integrations/supabase/client';
+import { useSupabaseContext } from '@/lib/supabase-provider';
 
 /**
  * Hook que sincroniza as configurações em tempo real do Supabase
@@ -16,9 +17,16 @@ import { supabase } from '@/integrations/supabase/client';
  * - 🔄 [SETTINGS-SYNC] POLLING: Fallback ativado
  */
 export function useSettingsRealtimeSync() {
+  const { loading: supabaseLoading } = useSupabaseContext();
   const loadSettingsFromSupabase = useSettingsStore((s) => s.loadSettingsFromSupabase);
 
   useEffect(() => {
+    // ⏳ Aguardar Supabase estar 100% pronto
+    if (supabaseLoading) {
+      console.log('⏳ [useSettingsRealtimeSync] Aguardando Supabase inicializar...');
+      return;
+    }
+
     let isSubscribed = true;
     let channel: any = null;
     let pollInterval: NodeJS.Timeout | null = null;
@@ -94,5 +102,5 @@ export function useSettingsRealtimeSync() {
         clearInterval(pollInterval);
       }
     };
-  }, [loadSettingsFromSupabase]);
+  }, [supabaseLoading, loadSettingsFromSupabase]);
 }

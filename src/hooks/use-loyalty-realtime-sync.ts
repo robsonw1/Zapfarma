@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useSupabaseContext } from '@/lib/supabase-provider';
 import { useLoyaltyStore } from '@/store/useLoyaltyStore';
 
 /**
@@ -8,12 +9,19 @@ import { useLoyaltyStore } from '@/store/useLoyaltyStore';
  * Com fallback de polling a cada 5 segundos
  */
 export const useLoyaltyRealtimeSync = () => {
+  const { loading: supabaseLoading } = useSupabaseContext();
   const currentCustomer = useLoyaltyStore((s) => s.currentCustomer);
   const getTransactionHistory = useLoyaltyStore((s) => s.getTransactionHistory);
   const getCoupons = useLoyaltyStore((s) => s.getCoupons);
   const refreshCurrentCustomer = useLoyaltyStore((s) => s.refreshCurrentCustomer);
 
   useEffect(() => {
+    // ⏳ Aguardar Supabase estar 100% pronto
+    if (supabaseLoading) {
+      console.log('⏳ [useLoyaltyRealtimeSync] Aguardando Supabase inicializar...');
+      return;
+    }
+
     if (!currentCustomer?.id) {
       console.log('❌ Nenhum cliente logado para sincronizar');
       return;
@@ -142,5 +150,5 @@ export const useLoyaltyRealtimeSync = () => {
       console.error('❌ Erro ao iniciar realtime sync:', error);
       return () => {};
     }
-  }, [currentCustomer?.id, getTransactionHistory, getCoupons, refreshCurrentCustomer]);
+  }, [supabaseLoading, currentCustomer?.id, getTransactionHistory, getCoupons, refreshCurrentCustomer]);
 };

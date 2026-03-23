@@ -46,7 +46,7 @@ export function Header({ onLoginClick }: HeaderProps) {
               href="#cardapio"
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
-              Cardápio
+              Nosso Catálogo
             </a>
           </nav>
 
@@ -134,7 +134,7 @@ export function Header({ onLoginClick }: HeaderProps) {
                   className="block px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary hover:bg-secondary rounded-lg transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Cardápio
+                  Nosso Catálogo
                 </a>
                 
                 {/* Delivery & Pickup Badges Mobile */}

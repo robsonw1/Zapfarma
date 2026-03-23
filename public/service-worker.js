@@ -1,5 +1,5 @@
 // Cache versioning
-const CACHE_VERSION = 'forneiro-eden-v1';
+const CACHE_VERSION = 'zapfarma-v1';
 const CACHE_URLS = [
   '/',
   '/index.html',
@@ -112,14 +112,14 @@ self.addEventListener('push', (event) => {
   const options = {
     icon: '/manifest.json width=192 height=192',
     badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><circle cx="48" cy="48" r="48" fill="%23ff9500"/></svg>',
-    tag: notificationData.tag || 'forneiro-eden-notification',
+    tag: notificationData.tag || 'zapfarma-notification',
     requireInteraction: notificationData.requireInteraction ?? false,
     data: notificationData.data || {},
     actions: notificationData.actions || [],
   };
 
   event.waitUntil(
-    self.registration.showNotification(notificationData.title || 'Forneiro Eden', options)
+    self.registration.showNotification(notificationData.title || 'ZapFarma', options)
   );
 });
 

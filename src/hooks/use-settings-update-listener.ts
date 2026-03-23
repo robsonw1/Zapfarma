@@ -53,10 +53,10 @@ export function useSettingsUpdateListener() {
           // Atualizar o store com os novos dados
           // ✅ NOVO: Usar loadSettingsLocally (SÓ em memória, SEM resalvar)
           loadSettingsLocally({
-            name: valueJson.name || 'Forneiro Éden',
+            name: valueJson.name || 'Nome da empresa',
             phone: valueJson.phone || '(11) 99999-9999',
-            address: valueJson.address || 'Rua das Pizzas, 123 - Centro',
-            slogan: valueJson.slogan || 'A Pizza mais recheada da cidade 🇮🇹',
+            address: valueJson.address || 'Rua da empresa, 123 - Centro',
+            slogan: valueJson.slogan || 'Mais Economia no seu bolso!',
             schedule: updatedSchedule, // ✅ SCHEDULE ATUALIZADO
             isManuallyOpen: settingsData.is_manually_open ?? true,
             deliveryTimeMin: valueJson.deliveryTimeMin ?? 60,

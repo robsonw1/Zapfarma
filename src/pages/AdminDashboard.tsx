@@ -1138,7 +1138,7 @@ const AdminDashboard = () => {
                     className="w-full justify-start gap-3 px-4 py-3 rounded-lg hover:bg-accent data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-colors"
                   >
                     <Pizza className="w-4 h-4" />
-                    <span className="text-sm font-medium">Cardápio</span>
+                    <span className="text-sm font-medium">Catálogo</span>
                   </TabsTrigger>
 
                   <TabsTrigger
@@ -1350,7 +1350,7 @@ const AdminDashboard = () => {
           <TabsContent value="products">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Gerenciar Cardápio</CardTitle>
+                <CardTitle>Gerenciar Catálogo</CardTitle>
                 <Button
                   className="gap-2"
                   onClick={() => {
@@ -1736,7 +1736,7 @@ const AdminDashboard = () => {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="store-name">Nome da Pizzaria</Label>
+                      <Label htmlFor="store-name">Nome da Empresa</Label>
                       <Input 
                         id="store-name" 
                         value={settingsForm.name}
@@ -2111,7 +2111,7 @@ const AdminDashboard = () => {
                     </div>
                     <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded border border-green-200 dark:border-green-800/30">
                       <p className="font-medium text-green-900 dark:text-green-200">🎨 300×300px</p>
-                      <p className="text-xs text-green-800 dark:text-green-300 mt-1">Perfeito para: panfletos, cardápios, whatsapp, emails</p>
+                      <p className="text-xs text-green-800 dark:text-green-300 mt-1">Perfeito para: panfletos, catálogos, whatsapp, emails</p>
                     </div>
                     <div className="p-3 bg-purple-50 dark:bg-purple-950/20 rounded border border-purple-200 dark:border-purple-800/30">
                       <p className="font-medium text-purple-900 dark:text-purple-200">✨ PNG vs SVG</p>

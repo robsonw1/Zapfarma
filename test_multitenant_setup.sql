@@ -7,8 +7,8 @@ SELECT COUNT(*) as tenant_count FROM tenants;
 -- 2. Inserir um tenant de teste (execute se não existe nenhum)
 INSERT INTO tenants (name, slug, mercadopago_access_token)
 VALUES (
-  'Forneiro Eden',
-  'forneiro-eden',
+  'ZapFarma',
+  'zapfarma',
   'APP_USR-180002917099817-100219-2471147eb2598b1c33200e807331f6db-1934091703'
 )
 ON CONFLICT (slug) DO UPDATE SET

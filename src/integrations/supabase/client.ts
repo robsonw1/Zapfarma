@@ -34,14 +34,14 @@ async function loadSupabaseConfig() {
   console.warn('[Supabase] ⚠️  Usando config padrão');
   return {
     url: 'https://towmfxficdkrgfwghcer.supabase.co',
-    key: 'sb_live_O5iF9eHqrKkxQPvASr7RvxZcTwEm1hq1nJOvTKzAZjWOjdVCM3x4zFLu5wPOhXkc8aZxGOqL7sNR0qrXEY9L',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvd21meGZpY2Rrcmdmd2doY2VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxODk5NjUsImV4cCI6MjA4OTc2NTk2NX0.0uCR-3gGBhUWsKwqme55wTIvSgkc2m89oBCmdIjFdO0',
   };
 }
 
 // Criar cliente com configuração padrão na inicialização
 const defaultConfig = {
   url: 'https://towmfxficdkrgfwghcer.supabase.co',
-  key: 'sb_live_O5iF9eHqrKkxQPvASr7RvxZcTwEm1hq1nJOvTKzAZjWOjdVCM3x4zFLu5wPOhXkc8aZxGOqL7sNR0qrXEY9L',
+  key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRvd21meGZpY2Rrcmdmd2doY2VyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxODk5NjUsImV4cCI6MjA4OTc2NTk2NX0.0uCR-3gGBhUWsKwqme55wTIvSgkc2m89oBCmdIjFdO0',
 };
 
 // Cliente singleton

@@ -405,7 +405,7 @@ export const NotificationsTab = () => {
                   <Label htmlFor="establishment">Nome do Estabelecimento</Label>
                   <Input
                     id="establishment"
-                    placeholder="Ex: Pizzaria Santos, Forneiro Centro"
+                    placeholder="Ex: Empresa Santos, Centro"
                     value={establishmentName}
                     onChange={(e) => setEstablishmentName(e.target.value)}
                     disabled={creatingInstance}

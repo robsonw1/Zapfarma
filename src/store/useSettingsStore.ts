@@ -75,17 +75,17 @@ const defaultWeekSchedule: WeekSchedule = {
 };
 
 const defaultSettings: StoreSettings = {
-  name: 'Forneiro ├ëden',
+  name: 'Nome da empresa',
   phone: '(11) 99999-9999',
-  address: 'Rua das Pizzas, 123 - Centro',
-  slogan: 'A Pizza mais recheada da cidade ­ƒç«­ƒç╣',
+  address: 'Rua da empresa, 123 - Centro',
+  slogan: 'Mais Economia no seu bolso!',
   schedule: defaultWeekSchedule,
   isManuallyOpen: true,
   deliveryTimeMin: 60,
   deliveryTimeMax: 70,
   pickupTimeMin: 40,
   pickupTimeMax: 50,
-  adminPassword: 'forneiroeden123',
+  adminPassword: 'mudar123',
   orderAlertEnabled: true,
   sendOrderSummaryToWhatsApp: false,
   enableScheduling: false,
@@ -142,10 +142,10 @@ export const useSettingsStore = create<SettingsStore>((set, get) => ({
         // Ô£à MAPEAR TODOS OS CAMPOS DO BANCO PARA O ESTADO
         set({
           settings: {
-            name: valueJson.name || 'Forneiro ├ëden',
+            name: valueJson.name || 'Nome da empresa',
             phone: valueJson.phone || '(11) 99999-9999',
-            address: valueJson.address || 'Rua das Pizzas, 123 - Centro',
-            slogan: valueJson.slogan || 'A Pizza mais recheada da cidade ­ƒç«­ƒç╣',
+            address: valueJson.address || 'Rua da empresa, 123 - Centro',
+            slogan: valueJson.slogan || 'Mais Economia no seu bolso!',
             schedule: loadedSchedule,
             // ­ƒöô CARREGAR DA COLUNA NORMALIZADA PRIMEIRO, depois do JSON como fallback
             isManuallyOpen: settingsData.is_manually_open !== null ? settingsData.is_manually_open : (valueJson.isManuallyOpen ?? true),
@@ -153,7 +153,7 @@ export const useSettingsStore = create<SettingsStore>((set, get) => ({
             deliveryTimeMax: valueJson.deliveryTimeMax ?? 70,
             pickupTimeMin: valueJson.pickupTimeMin ?? 40,
             pickupTimeMax: valueJson.pickupTimeMax ?? 50,
-            adminPassword: valueJson.adminPassword || 'forneiroeden123',
+            adminPassword: valueJson.adminPassword || 'mudar123',
             // ­ƒû¿´©Å  PRINTNODE: Tentar carregar da coluna normalizada PRIMEIRO, depois do JSON como fallback
             printnode_printer_id: settingsData.printnode_printer_id || valueJson.printnode_printer_id || null,
             print_mode: settingsData.print_mode || valueJson.print_mode || 'auto',

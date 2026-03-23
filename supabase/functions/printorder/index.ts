@@ -358,7 +358,7 @@ function buildReceipt(order: any, items: any[]): Uint8Array {
   linhas.push((`TOTAL: R$ ${Number(order.total).toFixed(2)}`).padStart(LARGURA));
   linhas.push("=".repeat(LARGURA));
   linhas.push("");
-  add(linhas, "FORNEIRO EDEN", "centro");
+  add(linhas, "ZAPFARMA", "centro");
   linhas.push("\n\n"); // respiro final
 
   // ── Conversão para latin1: Mapa direto de acentos + fallback ──
@@ -467,10 +467,10 @@ async function sendToPrintNode(
       },
       body: JSON.stringify({
         printerId: parseInt(printerId),
-        title: "Comanda - Forneiro Eden",
+        title: "Cupom - ZAPFARMA",
         contentType: "raw_base64",
         content: base64Content,
-        source: "Pizzaria Forneiro Eden",
+        source: "Farmácia ZapFarma",
       }),
       signal: AbortSignal.timeout(15000),
     });

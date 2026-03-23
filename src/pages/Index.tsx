@@ -11,9 +11,11 @@ import { useLoyaltyStore } from '@/store/useLoyaltyStore';
 import { useLoyaltyRealtimeSync } from '@/hooks/use-loyalty-realtime-sync';
 import { useRealtimeSync } from '@/hooks/use-realtime-sync';
 import { useSettingsRealtimeSync } from '@/hooks/use-settings-realtime-sync';
+import { useSupabaseContext } from '@/lib/supabase-provider';
 import { useState, useEffect } from 'react';
 
 const Index = () => {
+  const { loading: supabaseLoading } = useSupabaseContext();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isDeliveryAddressOpen, setIsDeliveryAddressOpen] = useState(false);
   const currentCustomer = useLoyaltyStore((s) => s.currentCustomer);
@@ -24,8 +26,13 @@ const Index = () => {
   useLoyaltyRealtimeSync();
   useSettingsRealtimeSync();
 
-  // Restaurar login lembrado ao inicializar
+  // Restaurar login lembrado ao inicializar (APÓS Supabase estar 100% pronto)
   useEffect(() => {
+    if (supabaseLoading) {
+      console.log('⏳ [PAGE-INIT] Aguardando Supabase inicializar antes de restaurar login...');
+      return;
+    }
+
     const restoreLogin = async () => {
       console.log('🔄 [PAGE-INIT] Tentando restaurar login lembrado...');
       const remembered = localStorage.getItem('loyalty_remembered_login');
@@ -40,7 +47,7 @@ const Index = () => {
     };
 
     restoreLogin();
-  }, [restoreRememberedLogin]);
+  }, [supabaseLoading, restoreRememberedLogin]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

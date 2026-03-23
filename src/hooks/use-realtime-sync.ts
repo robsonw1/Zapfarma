@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useSupabaseContext } from '@/lib/supabase-provider';
 import { useCatalogStore } from '@/store/useCatalogStore';
 import { useOrdersStore } from '@/store/useOrdersStore';
 import { useNeighborhoodsStore } from '@/store/useNeighborhoodsStore';
@@ -75,7 +76,15 @@ const parseNeighborhoodFromSupabase = (supabaseData: any): Neighborhood => {
  * 5. Todos os admins recebem atualizações em tempo real
  */
 export const useRealtimeSync = () => {
+  const { loading: supabaseLoading } = useSupabaseContext();
+
   useEffect(() => {
+    // ⏳ Aguardar Supabase estar 100% pronto
+    if (supabaseLoading) {
+      console.log('⏳ [useRealtimeSync] Aguardando Supabase inicializar...');
+      return;
+    }
+
     console.log('🚀 Iniciando useRealtimeSync hook...');
     let isMounted = true;
     let productsPollInterval: NodeJS.Timeout | null = null;
@@ -386,5 +395,5 @@ export const useRealtimeSync = () => {
       ordersChannel.unsubscribe();
       neighborhoodsChannel.unsubscribe();
     };
-  }, []);
+  }, [supabaseLoading]);
 };

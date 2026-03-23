@@ -24,7 +24,7 @@ async function testEdgeFunction() {
     console.log('\n📝 TESTE 1: Validação com schedule completa')
     const testSettings1 = {
       settings: {
-        name: 'Forneiro Éden - Test',
+        name: 'ZapFarma - Test',
         phone: '(21) 97224-3112',
         address: 'Rua das Pizzas, 123',
         slogan: 'A Pizza mais recheada 🍕',

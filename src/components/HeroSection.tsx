@@ -67,7 +67,7 @@ export function HeroSection() {
               href="#cardapio"
               className="w-full sm:w-auto px-8 py-4 rounded-xl btn-cta text-center"
             >
-              Ver Cardápio
+              Ver Catálogo Completo
             </a>
             <a
               href="#combos"

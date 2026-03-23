@@ -6,109 +6,109 @@
 
 @layer base {
   :root {
-    /* Warm Pizzeria Theme */
-    --background: 35 30% 97%;
-    --foreground: 25 30% 12%;
+    /* Pharmacy Theme - Light Mode: White + Blue */
+    --background: 0 0% 100%;
+    --foreground: 217 33% 17%;
 
-    --card: 35 35% 98%;
-    --card-foreground: 25 30% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 17%;
 
-    --popover: 35 35% 98%;
-    --popover-foreground: 25 30% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
 
-    /* Terracotta/Amber Primary */
-    --primary: 25 85% 45%;
-    --primary-foreground: 35 30% 98%;
+    /* Blue Primary */
+    --primary: 217 100% 41%;
+    --primary-foreground: 0 0% 100%;
 
-    /* Warm Cream Secondary */
-    --secondary: 35 40% 92%;
-    --secondary-foreground: 25 30% 20%;
+    /* Light Blue Secondary */
+    --secondary: 217 32% 96%;
+    --secondary-foreground: 217 33% 17%;
 
-    --muted: 35 25% 90%;
-    --muted-foreground: 25 15% 45%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 217 12% 43%;
 
-    /* Golden Accent */
-    --accent: 38 92% 50%;
-    --accent-foreground: 25 30% 12%;
+    /* Medium Blue Accent */
+    --accent: 217 91% 60%;
+    --accent-foreground: 217 33% 17%;
 
-    /* Deep Red for CTAs */
+    /* Red for CTAs */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 20% 85%;
-    --input: 35 20% 85%;
-    --ring: 25 85% 45%;
+    --border: 217 32% 91%;
+    --input: 217 32% 91%;
+    --ring: 217 100% 41%;
 
     --radius: 0.75rem;
 
-    /* Custom Pizzeria Colors */
-    --terracotta: 15 70% 42%;
-    --terracotta-light: 15 60% 55%;
-    --amber: 38 92% 50%;
-    --amber-light: 42 95% 65%;
-    --cream: 40 40% 96%;
-    --cream-dark: 35 30% 90%;
-    --charcoal: 25 20% 18%;
-    --olive: 80 25% 35%;
+    /* Pharmacy Brand Colors */
+    --pharmacy-blue: 217 100% 41%;
+    --pharmacy-blue-light: 217 91% 60%;
+    --pharmacy-white: 0 0% 100%;
+    --pharmacy-gray: 217 12% 43%;
+    --pharmacy-light-gray: 0 0% 96%;
+    --pharmacy-dark-blue: 217 33% 25%;
+    --pharmacy-sky: 217 91% 70%;
     --tomato: 8 80% 50%;
     
     /* Gradients */
-    --gradient-warm: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(35 30% 97% / 0) 0%, hsl(35 30% 97%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(35 35% 100%) 0%, hsl(35 30% 96%) 100%);
+    --gradient-pharmacy: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100% / 0) 0%, hsl(0 0% 100%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(217 32% 96%) 100%);
 
     /* Shadows */
-    --shadow-warm: 0 4px 20px -4px hsl(25 85% 45% / 0.15);
-    --shadow-card: 0 2px 12px -2px hsl(25 30% 30% / 0.08);
-    --shadow-elevated: 0 8px 30px -8px hsl(25 30% 30% / 0.12);
+    --shadow-pharmacy: 0 4px 20px -4px hsl(217 100% 41% / 0.15);
+    --shadow-card: 0 2px 12px -2px hsl(217 33% 20% / 0.08);
+    --shadow-elevated: 0 8px 30px -8px hsl(217 33% 20% / 0.12);
 
-    --sidebar-background: 35 30% 97%;
-    --sidebar-foreground: 25 30% 20%;
-    --sidebar-primary: 25 85% 45%;
-    --sidebar-primary-foreground: 35 30% 98%;
-    --sidebar-accent: 35 40% 92%;
-    --sidebar-accent-foreground: 25 30% 20%;
-    --sidebar-border: 35 20% 85%;
-    --sidebar-ring: 25 85% 45%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 217 33% 17%;
+    --sidebar-primary: 217 100% 41%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 32% 88%;
+    --sidebar-accent-foreground: 217 33% 17%;
+    --sidebar-border: 217 32% 91%;
+    --sidebar-ring: 217 100% 41%;
   }
 
   .dark {
-    --background: 25 20% 8%;
-    --foreground: 35 30% 95%;
+    /* Pharmacy Theme - Dark Mode: Professional Blue + White */
+    --background: 217 85% 30%;
+    --foreground: 0 0% 100%;
 
-    --card: 25 20% 12%;
-    --card-foreground: 35 30% 95%;
+    --card: 217 85% 36%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 25 20% 12%;
-    --popover-foreground: 35 30% 95%;
+    --popover: 217 85% 36%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 30 80% 55%;
-    --primary-foreground: 25 20% 8%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 217 85% 30%;
 
-    --secondary: 25 15% 18%;
-    --secondary-foreground: 35 30% 90%;
+    --secondary: 217 85% 40%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 25 15% 18%;
-    --muted-foreground: 35 20% 60%;
+    --muted: 217 85% 40%;
+    --muted-foreground: 0 0% 72%;
 
-    --accent: 38 85% 55%;
-    --accent-foreground: 25 20% 8%;
+    --accent: 217 91% 70%;
+    --accent-foreground: 217 85% 30%;
 
     --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 25 15% 20%;
-    --input: 25 15% 20%;
-    --ring: 30 80% 55%;
+    --border: 217 85% 42%;
+    --input: 217 85% 42%;
+    --ring: 0 0% 100%;
 
-    --sidebar-background: 25 20% 10%;
-    --sidebar-foreground: 35 30% 90%;
-    --sidebar-primary: 30 80% 55%;
-    --sidebar-primary-foreground: 25 20% 8%;
-    --sidebar-accent: 25 15% 15%;
-    --sidebar-accent-foreground: 35 30% 90%;
-    --sidebar-border: 25 15% 18%;
-    --sidebar-ring: 30 80% 55%;
+    --sidebar-background: 217 85% 30%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 217 85% 30%;
+    --sidebar-accent: 217 85% 40%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217 85% 42%;
+    --sidebar-ring: 0 0% 100%;
   }
 }
 

@@ -322,7 +322,7 @@ export const WhatsAppSettingsPanel = () => {
                   <p className="font-semibold mb-1">Como funciona:</p>
                   <ol className="list-decimal list-inside space-y-1 ml-2">
                     <li>Digite um <strong>nome único</strong> para este estabelecimento</li>
-                    <li>Exemplo: "pizzaria-santos" ou "forneiro-centro"</li>
+                    <li>Exemplo: "empresa-santos" ou "empresa-centro"</li>
                     <li>Clique em "Testar Conexão" (usa sua API secretamente)</li>
                     <li>Salve as configurações</li>
                   </ol>
@@ -340,7 +340,7 @@ export const WhatsAppSettingsPanel = () => {
                     onChange={(e) => setInstanceName(e.target.value)}
                     className="mt-2"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Nome único sem espaços (ex: pizzaria-centro, forneiro-eden)</p>
+                  <p className="text-xs text-gray-500 mt-1">Nome único sem espaços (ex: empresa-centro, empresa-rj)</p>
                 </div>
 
                 <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">

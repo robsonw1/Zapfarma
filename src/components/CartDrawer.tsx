@@ -59,10 +59,10 @@ export function CartDrawer() {
               Carrinho vazio
             </h3>
             <p className="text-muted-foreground mb-6">
-              Adicione itens deliciosos ao seu carrinho
+              Adicione itens ao seu carrinho
             </p>
             <Button onClick={() => setCartOpen(false)}>
-              Ver cardápio
+              Ver Catálogo
             </Button>
           </div>
         ) : (
