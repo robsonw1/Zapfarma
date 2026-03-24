@@ -1,81 +1,40 @@
 import { useState, useEffect } from 'react';
 import { MedicationCard } from '@/components/MedicationCard';
-import { ReceiptUploadModal } from '@/components/ReceiptUploadModal';
 import { useMedicationStore } from '@/store/useMedicationStore';
-import { useLoyaltyStore } from '@/store/useLoyaltyStore';
-import { useReceiptStore } from '@/store/useReceiptStore';
 import { useMedicationCatalog } from '@/hooks/use-pharmacy';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Medication, medicationCategories } from '@/data/pharmacy';
-import { Search, AlertTriangle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Search } from 'lucide-react';
 
 export function MedicationCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('analgesicos');
-  const [selectedMedication, setSelectedMedication] = useState<Medication | null>(null);
-  const [showReceiptModal, setShowReceiptModal] = useState(false);
 
-  // Carregar medicamentos do Supabase (com fallback para mock)
+  // Carregar medicamentos
   const { medications } = useMedicationCatalog();
-  
-  // Store
   const store = useMedicationStore();
-  const currentCustomer = useLoyaltyStore((s) => s.currentCustomer);
-  const receipts = useReceiptStore((s) => s.receipts);
-  const loadReceiptsFromSupabase = useReceiptStore((s) => s.loadReceiptsFromSupabase);
 
-  // Sincronizar medicamentos carregados com o store
+  // Sincronizar com store
   useEffect(() => {
-    store.setMedications(medications);
-  }, [medications]);
-
-  // Carregar receitas do cliente ao montar
-  useEffect(() => {
-    if (currentCustomer?.id) {
-      loadReceiptsFromSupabase(currentCustomer.id);
+    if (medications && medications.length > 0) {
+      store.setMedications(medications);
     }
-  }, [currentCustomer?.id, loadReceiptsFromSupabase]);
+  }, [medications, store]);
 
   const filterBySearch = (items: Medication[]) => {
     if (!searchQuery) return items;
     return items.filter(
       (m) =>
         m.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        m.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (m.active_ingredient?.toLowerCase().includes(searchQuery.toLowerCase()) || true)
+        m.description?.toLowerCase().includes(searchQuery.toLowerCase())
     );
   };
 
-  const hasValidReceipt = (medicationId: string) => {
-    return receipts.some(
-      (r) =>
-        r.medicationId === medicationId &&
-        r.status === 'verificada' &&
-        new Date(r.dateExpires) > new Date()
-    );
-  };
-
-  const handleMedicationClick = (medication: Medication) => {
-    if (medication.requires_recipe && !hasValidReceipt(medication.id)) {
-      setSelectedMedication(medication);
-      setShowReceiptModal(true);
-    } else {
-      // Adicionar ao carrinho
-      store.addToCart({
-        id: medication.id,
-        medication,
-        quantity: 1,
-        totalPrice: medication.price,
-      });
-    }
-  };
-
-  // Medicamentos do store (sincronizados com dados do Supabase)
+  // Medicamentos do store
   const allMedications = store.medications;
   
-  // Filtrar medicamentos por categoria ativa
+  // Filtrar por categoria e busca
   const medicationsByCategory = allMedications.filter((m: Medication) => m.category === activeTab);
   const filteredMedications = filterBySearch(medicationsByCategory);
 
@@ -107,18 +66,6 @@ export function MedicationCatalog() {
         </div>
       </div>
 
-      {/* Alerta importante */}
-      {currentCustomer && (
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <Alert>
-            <AlertTriangle className="h-4 w-4 text-orange-600" />
-            <AlertDescription>
-              👋 Bem-vindo(a), <strong>{currentCustomer.name}</strong>! Medicamentos que requerem receita serão validados antes da entrega.
-            </AlertDescription>
-          </Alert>
-        </div>
-      )}
-
       {/* Categories */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -139,11 +86,7 @@ export function MedicationCatalog() {
                   {filteredMedications.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                       {filteredMedications.map((medication, index) => (
-                        <div
-                          key={medication.id}
-                          onClick={() => handleMedicationClick(medication)}
-                          className="cursor-pointer"
-                        >
+                        <div key={medication.id} className="cursor-pointer">
                           <MedicationCard medication={medication} index={index} />
                         </div>
                       ))}
@@ -163,27 +106,6 @@ export function MedicationCatalog() {
           </TabsContent>
         </Tabs>
       </div>
-
-      {/* Receipt Upload Modal */}
-      {selectedMedication && (
-        <ReceiptUploadModal
-          isOpen={showReceiptModal}
-          medicationId={selectedMedication.id}
-          medicationName={selectedMedication.name}
-          customerId={currentCustomer?.id || ''}
-          onClose={() => {
-            setShowReceiptModal(false);
-            setSelectedMedication(null);
-          }}
-          onSuccess={() => {
-            console.log('✅ Receita enviada com sucesso!');
-            // Recarregar receitas
-            if (currentCustomer?.id) {
-              loadReceiptsFromSupabase(currentCustomer.id);
-            }
-          }}
-        />
-      )}
     </div>
   );
 }
