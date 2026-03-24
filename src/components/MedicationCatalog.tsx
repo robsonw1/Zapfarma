@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { MedicationCard } from '@/components/MedicationCard';
-import { useMedicationStore } from '@/store/useMedicationStore';
 import { useMedicationCatalog } from '@/hooks/use-pharmacy';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -11,15 +10,9 @@ export function MedicationCatalog() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('analgesicos');
 
-  // Carregar medicamentos
-  const { medications: rawMedications = [] } = useMedicationCatalog();
-  const medications = (Array.isArray(rawMedications) ? rawMedications : []) as import('@/data/pharmacy').Medication[];
-  const store = useMedicationStore();
-
-  // Sincronizar com store (sem condição)
-  useEffect(() => {
-    store.setMedications(medications);
-  }, [medications]);
+  // Carregar medicamentos direto do hook (sem store)
+  const { medications = [] } = useMedicationCatalog();
+  const typedMedications = (Array.isArray(medications) ? medications : []) as Medication[];
 
   const filterBySearch = (items: Medication[]) => {
     if (!searchQuery) return items;
@@ -30,11 +23,8 @@ export function MedicationCatalog() {
     );
   };
 
-  // Medicamentos do store
-  const allMedications = store.medications;
-  
-  // Filtrar por categoria e busca
-  const medicationsByCategory = allMedications.filter((m: Medication) => m.category === activeTab);
+  // Filtrar por categoria e busca direto
+  const medicationsByCategory = typedMedications.filter((m: Medication) => m.category === activeTab);
   const filteredMedications = filterBySearch(medicationsByCategory);
 
   return (
