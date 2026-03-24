@@ -13,8 +13,6 @@ import { toast } from 'sonner';
  * Funciona com mock data se tabela não existir
  */
 export function useMedicationCatalog() {
-  const queryClient = useQueryClient();
-
   const { data: medications = [], isLoading, error } = useQuery({
     queryKey: ['medications'],
     queryFn: async () => {
@@ -39,27 +37,6 @@ export function useMedicationCatalog() {
     staleTime: 5 * 60 * 1000,
     retry: false,
   });
-
-  // Setup realtime subscription (safe)
-  useEffect(() => {
-    if (!medications || medications.length === 0) return;
-
-    const channel = supabase
-      .channel('medications-updates')
-      .on(
-        'postgres_changes',
-        { event: '*', schema: 'public', table: 'medications' },
-        () => {
-          queryClient.invalidateQueries({ queryKey: ['medications'] });
-          toast.success('Catálogo atualizado!');
-        }
-      )
-      .subscribe();
-
-    return () => {
-      channel.unsubscribe();
-    };
-  }, [queryClient]);
 
   return { medications, isLoading, error };
 }
