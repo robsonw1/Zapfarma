@@ -1,4 +1,4 @@
-import { Medication } from '@/data/medications';
+import { Medication } from '@/data/pharmacy';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { AlertCircle, AlertTriangle, Pill } from 'lucide-react';
@@ -13,7 +13,7 @@ interface MedicationCardProps {
 export function MedicationCard({ medication, index = 0 }: MedicationCardProps) {
   const { setSelectedProduct, setProductModalOpen } = useUIStore();
 
-  const isUnavailable = !medication.isActive || medication.stock <= 0;
+  const isUnavailable = !medication.is_active || medication.stock <= 0;
 
   const handleClick = () => {
     if (isUnavailable) return;
@@ -53,24 +53,19 @@ export function MedicationCard({ medication, index = 0 }: MedicationCardProps) {
 
       {/* Badges - Avisos importantes */}
       <div className="flex flex-wrap gap-2 p-4 pb-0">
-        {medication.isPopular && (
+        {medication.is_active && (
           <Badge variant="default" className="badge-popular flex items-center gap-1">
             <Pill className="w-3 h-3" />
-            Popular
+            Disponível
           </Badge>
         )}
-        {medication.isNew && (
-          <Badge variant="default" className="bg-accent text-accent-foreground flex items-center gap-1">
-            ⭐ Novo
-          </Badge>
-        )}
-        {medication.requiresRecipe && (
+        {medication.requires_recipe && (
           <Badge variant="destructive" className="flex items-center gap-1 bg-orange-600">
             <AlertTriangle className="w-3 h-3" />
             Requer Receita
           </Badge>
         )}
-        {medication.isControlled && (
+        {medication.is_controlled && (
           <Badge variant="destructive" className="flex items-center gap-1 bg-red-700">
             <AlertTriangle className="w-3 h-3" />
             Controlado
@@ -85,7 +80,7 @@ export function MedicationCard({ medication, index = 0 }: MedicationCardProps) {
         </h3>
         
         <p className="text-xs text-muted-foreground mb-1 italic">
-          {medication.activeIngredient}
+          {medication.active_ingredient}
         </p>
         
         <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
@@ -97,9 +92,9 @@ export function MedicationCard({ medication, index = 0 }: MedicationCardProps) {
           <span className={medication.stock > 10 ? "text-green-600" : medication.stock > 0 ? "text-orange-600" : "text-red-600"}>
             📦 {medication.stock > 0 ? `${medication.stock} em estoque` : '❌ Esgotado'}
           </span>
-          {medication.maxQuantityPerOrder && (
+          {medication.max_quantity_per_order && (
             <span className="text-blue-600 font-semibold">
-              Máx: {medication.maxQuantityPerOrder}
+              Máx: {medication.max_quantity_per_order}
             </span>
           )}
         </div>
