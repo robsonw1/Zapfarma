@@ -1,6 +1,10 @@
 import { create } from "zustand";
 import type { Product } from "@/data/products";
 import { getAllProducts } from "@/data/products";
+import type { Medication } from "@/data/medications";
+
+// ✅ Alias para compatibilidade: Medication = Product (para PharmaDrive)
+export type CatalogItem = Product | Medication;
 
 type CatalogState = {
   /** Map by product id for fast updates (includes base + custom). */
