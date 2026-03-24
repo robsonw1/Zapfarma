@@ -55,7 +55,8 @@ export default function PharmacyAdminDashboard() {
   const { theme } = useTheme();
 
   // Hooks
-  const { medications: loadedMedications } = useMedicationCatalog();
+  const { medications: loadedMedicationsRaw } = useMedicationCatalog();
+  const loadedMedications = (Array.isArray(loadedMedicationsRaw) ? loadedMedicationsRaw : []) as Medication[];
   const { isPending: isSaving } = useSaveMedication();
   const { isPending: isDeleting } = useDeleteMedication();
 
