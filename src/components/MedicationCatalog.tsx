@@ -12,15 +12,14 @@ export function MedicationCatalog() {
   const [activeTab, setActiveTab] = useState('analgesicos');
 
   // Carregar medicamentos
-  const { medications } = useMedicationCatalog();
+  const { medications: rawMedications = [] } = useMedicationCatalog();
+  const medications = (Array.isArray(rawMedications) ? rawMedications : []) as import('@/data/pharmacy').Medication[];
   const store = useMedicationStore();
 
-  // Sincronizar com store
+  // Sincronizar com store (sem condição)
   useEffect(() => {
-    if (medications && medications.length > 0) {
-      store.setMedications(medications);
-    }
-  }, [medications, store]);
+    store.setMedications(medications);
+  }, [medications]);
 
   const filterBySearch = (items: Medication[]) => {
     if (!searchQuery) return items;
