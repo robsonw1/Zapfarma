@@ -29,7 +29,7 @@ import {
   Flame,
   LogOut,
   Home,
-  Pizza,
+  Pill,
   ShoppingBag,
   MapPin,
   Settings,
@@ -185,6 +185,7 @@ const AdminDashboard = () => {
 
   // Order filters
   const [orderStatusFilter, setOrderStatusFilter] = useState<string>('all');
+  const [orderTypeFilter, setOrderTypeFilter] = useState<'all' | 'regular' | 'pharmacy'>('all');
   const [orderSort, setOrderSort] = useState<'newest' | 'oldest'>('newest');
 
   // ✅ NOVA SOLUÇÃO: Sincronizar settingsForm APENAS no mount
@@ -776,7 +777,14 @@ const AdminDashboard = () => {
       // Apply status filter
       const statusMatch = orderStatusFilter === 'all' || order.status === orderStatusFilter;
       
-      return isInRange && statusMatch;
+      // Apply type filter (regular pizza vs pharmacy)
+      const isPharmacy = (order as any).is_pharmacy_order === true;
+      const typeMatch = 
+        orderTypeFilter === 'all' ||
+        (orderTypeFilter === 'pharmacy' && isPharmacy) ||
+        (orderTypeFilter === 'regular' && !isPharmacy);
+      
+      return isInRange && statusMatch && typeMatch;
     });
     
     // Apply sorting
@@ -789,7 +797,7 @@ const AdminDashboard = () => {
     console.log(`📊 Filtragem: ${orders.length} pedidos totais → ${filtered.length} no período ${format(dateRange.start, 'dd/MM')} a ${format(dateRange.end, 'dd/MM')}`);
     
     return filtered;
-  }, [orders, dateRange, orderStatusFilter, orderSort]);
+  }, [orders, dateRange, orderStatusFilter, orderTypeFilter, orderSort]);
 
   const handleSaveSettings = async () => {
     try {
@@ -1137,8 +1145,8 @@ const AdminDashboard = () => {
                     value="products"
                     className="w-full justify-start gap-3 px-4 py-3 rounded-lg hover:bg-accent data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-colors"
                   >
-                    <Pizza className="w-4 h-4" />
-                    <span className="text-sm font-medium">Catálogo</span>
+                    <Pill className="w-4 h-4" />
+                    <span className="text-sm font-medium">Cardápio</span>
                   </TabsTrigger>
 
                   <TabsTrigger
@@ -1350,7 +1358,7 @@ const AdminDashboard = () => {
           <TabsContent value="products">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Gerenciar Catálogo</CardTitle>
+                <CardTitle>Gerenciar Cardápio</CardTitle>
                 <Button
                   className="gap-2"
                   onClick={() => {
@@ -1498,6 +1506,19 @@ const AdminDashboard = () => {
 
                 {/* Order Filter and Sort Controls */}
                 <div className="mb-4 flex gap-4 flex-wrap">
+                  <div className="flex-1 min-w-[200px]">
+                    <label className="text-sm font-medium mb-2 block">Tipo de Pedido</label>
+                    <select
+                      value={orderTypeFilter}
+                      onChange={(e) => setOrderTypeFilter(e.target.value as 'all' | 'regular' | 'pharmacy')}
+                      className="w-full px-3 py-2 border border-input rounded-md bg-background text-sm"
+                    >
+                      <option value="all">Todos os Pedidos</option>
+                      <option value="regular">Pizzas e Bebidas</option>
+                      <option value="pharmacy">Medicamentos</option>
+                    </select>
+                  </div>
+
                   <div className="flex-1 min-w-[200px]">
                     <label className="text-sm font-medium mb-2 block">Filtrar por Status</label>
                     <select
@@ -1736,7 +1757,7 @@ const AdminDashboard = () => {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="store-name">Nome da Empresa</Label>
+                      <Label htmlFor="store-name">Nome da Pizzaria</Label>
                       <Input 
                         id="store-name" 
                         value={settingsForm.name}
@@ -2111,7 +2132,7 @@ const AdminDashboard = () => {
                     </div>
                     <div className="p-3 bg-green-50 dark:bg-green-950/20 rounded border border-green-200 dark:border-green-800/30">
                       <p className="font-medium text-green-900 dark:text-green-200">🎨 300×300px</p>
-                      <p className="text-xs text-green-800 dark:text-green-300 mt-1">Perfeito para: panfletos, catálogos, whatsapp, emails</p>
+                      <p className="text-xs text-green-800 dark:text-green-300 mt-1">Perfeito para: panfletos, cardápios, whatsapp, emails</p>
                     </div>
                     <div className="p-3 bg-purple-50 dark:bg-purple-950/20 rounded border border-purple-200 dark:border-purple-800/30">
                       <p className="font-medium text-purple-900 dark:text-purple-200">✨ PNG vs SVG</p>
